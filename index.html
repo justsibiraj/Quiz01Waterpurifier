@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Which Water Purifier Do You Need?</title>
+<style>
+  body {
+    background-color: #111;
+    color: #eee;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .quiz-container {
+    max-width: 600px;
+    width: 100%;
+    background: #1a1a1a;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(255,255,255,0.05);
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+  .question {
+    margin-bottom: 20px;
+  }
+  .option {
+    display: block;
+    background: #222;
+    color: #eee;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 12px;
+    margin: 8px 0;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.2s ease;
+  }
+  .option:hover {
+    background: #333;
+  }
+  button {
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    display: block;
+    margin: 20px auto 0;
+  }
+  button:hover {
+    background: #ddd;
+  }
+</style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Which Water Purifier Do You Need?</h1>
+    <div id="quiz"></div>
+  </div>
+
+<script>
+const quizData = [
+  {
+    q: "Where does your household water come from?",
+    options: ["Borewell", "Municipal supply", "Mixed (depends on area)"],
+    key: "source"
+  },
+  {
+    q: "Have you tested your water’s TDS?",
+    options: ["<150 ppm", "150–300 ppm", "300–600 ppm", ">600 ppm", "I don’t know"],
+    key: "tds"
+  },
+  {
+    q: "How does your tap water taste or look?",
+    options: ["Normal and clear", "Slightly salty or metallic", "Very salty or bitter", "Cloudy or has particles"],
+    key: "taste"
+  },
+  {
+    q: "Does your area have frequent power cuts?",
+    options: ["Yes, daily or long durations", "Occasionally", "Rarely / Never"],
+    key: "power"
+  },
+  {
+    q: "Do you have small children, elderly, or health-sensitive members?",
+    options: ["Yes", "No"],
+    key: "health"
+  },
+  {
+    q: "What’s your approximate monthly maintenance budget?",
+    options: ["< ₹150/month", "₹150–₹300/month", "> ₹300/month"],
+    key: "budget"
+  }
+];
+
+let answers = {};
+let currentQuestion = 0;
+
+function showQuestion() {
+  const q = quizData[currentQuestion];
+  const container = document.getElementById("quiz");
+  container.innerHTML = `
+    <div class="question">
+      <h3>${q.q}</h3>
+      ${q.options.map(opt => `<div class="option" onclick="selectOption('${q.key}', '${opt}')">${opt}</div>`).join("")}
+    </div>
+  `;
+}
+
+function selectOption(key, value) {
+  answers[key] = value;
+  currentQuestion++;
+  if (currentQuestion < quizData.length) {
+    showQuestion();
+  } else {
+    evaluateResult();
+  }
+}
+
+function evaluateResult() {
+  const { source, tds, taste, power, health, budget } = answers;
+  let result = "uf-uv.html"; // default
+  
+  if (tds === ">600 ppm" || taste === "Very salty or bitter" || source === "Borewell") {
+    result = "ro.html";
+  } else if (tds === "<150 ppm" || tds === "150–300 ppm" || (source === "Municipal supply" && taste === "Normal and clear")) {
+    result = "uf.html";
+  } else if (power === "Yes, daily or long durations") {
+    result = "uf.html";
+  } else {
+    result = "uf-uv.html";
+  }
+
+  window.location.href = result;
+}
+
+showQuestion();
+</script>
+</body>
+</html>
