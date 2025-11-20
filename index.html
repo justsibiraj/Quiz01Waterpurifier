@@ -1,508 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Goondas.com - for all your kattapanchayatu needs</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Optional Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #000;
-      color: #fff;
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    /* Layout helpers */
-    .container {
-      width: 100%;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    /* NAVBAR */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: #000;
-      border-bottom: 1px solid #222;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 0;
-    }
-
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .nav-left img {
-      width: 42px;
-      height: 42px;
-      object-fit: contain;
-    }
-
-    .nav-left span {
-      font-weight: 600;
-      font-size: 1.1rem;
-      letter-spacing: 0.05em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      font-size: 0.95rem;
-    }
-
-    .nav-links a {
-      position: relative;
-      font-weight: 400;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -0.25rem;
-      width: 0;
-      height: 2px;
-      background: #ff4b4b;
-      transition: width 0.2s ease-out;
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    /* HERO */
-    .hero {
-      padding: 3rem 0 1rem;
-      text-align: center;
-    }
-
-    .hero-logo {
-      margin: 0 auto 1.5rem;
-      width: 160px;
-    }
-
-    .hero-title {
-      font-size: 2.4rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      margin-bottom: 0.25rem;
-    }
-
-    .hero-subtitle {
-      font-size: 0.95rem;
-      color: #ccc;
-      margin-bottom: 2.5rem;
-    }
-
-    /* ABOUT */
-    .about {
-      max-width: 650px;
-      margin: 0 auto 3rem;
-      text-align: left;
-    }
-
-    .section-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-    }
-
-    .about p + p {
-      margin-top: 0.75rem;
-    }
-
-    /* TALENT SECTION */
-    .talent-section {
-      margin: 3rem auto;
-      text-align: center;
-    }
-
-    .talent-section h2 {
-      font-size: 1.2rem;
-      font-weight: 500;
-      margin-bottom: 2rem;
-    }
-
-    .talent-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1.75rem;
-    }
-
-    .talent-card {
-      background: #050505;
-      border-radius: 999px;
-      padding: 1rem 0.75rem 1.5rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .talent-card img {
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin: 0 auto 0.75rem;
-    }
-
-    .talent-name {
-      font-weight: 600;
-      font-size: 0.95rem;
-      margin-bottom: 0.35rem;
-    }
-
-    .talent-meta {
-      font-size: 0.8rem;
-      color: #ccc;
-      line-height: 1.4;
-    }
-
-    /* APPLY SECTION */
-    .apply-section {
-      margin: 4rem auto;
-      text-align: center;
-    }
-
-    .apply-section h2 {
-      font-size: 1.2rem;
-      font-weight: 500;
-      margin-bottom: 0.25rem;
-    }
-
-    .apply-section p {
-      font-size: 0.9rem;
-      color: #bbb;
-      margin-bottom: 2rem;
-    }
-
-    .apply-card {
-      border-radius: 16px;
-      border: 1px solid #666;
-      padding: 2rem 1.5rem;
-      max-width: 600px;
-      margin: 0 auto;
-      background: radial-gradient(circle at top, #111 0%, #000 55%);
-      box-shadow: 0 0 0 1px #222;
-    }
-
-    .form-row {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .field-label {
-      font-size: 0.8rem;
-      text-align: left;
-      color: #ccc;
-    }
-
-    .input {
-      width: 100%;
-      border-radius: 999px;
-      border: 1px solid #777;
-      padding: 0.55rem 1rem;
-      background: transparent;
-      color: #fff;
-      outline: none;
-      font-size: 0.85rem;
-    }
-
-    .input::placeholder {
-      color: #666;
-    }
-
-    .tools-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .tools-pills {
-      display: flex;
-      gap: 0.4rem;
-      flex-wrap: wrap;
-    }
-
-    .tool-pill {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 1px solid #666;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      background: #111;
-    }
-
-    .apply-btn {
-      margin-top: 0.5rem;
-      border: none;
-      border-radius: 999px;
-      padding: 0.65rem 1.7rem;
-      background: #ff4b4b;
-      color: #fff;
-      font-size: 0.85rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      cursor: pointer;
-    }
-
-    .apply-btn:hover {
-      filter: brightness(1.1);
-    }
-
-    /* ALUMNI SECTION */
-    .alumni {
-      margin: 4rem auto 3rem;
-      text-align: center;
-    }
-
-    .alumni h2 {
-      font-size: 0.95rem;
-      font-weight: 400;
-      color: #bbb;
-      margin-bottom: 1.5rem;
-      text-transform: lowercase;
-    }
-
-    .alumni-logos {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2.5rem;
-      align-items: center;
-    }
-
-    .alumni-logos img {
-      max-height: 60px;
-      object-fit: contain;
-      filter: grayscale(0.1);
-    }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid #222;
-      padding: 2rem 0 2.5rem;
-      text-align: center;
-      font-size: 0.85rem;
-      color: #aaa;
-    }
-
-    footer span {
-      display: block;
-    }
-
-    footer .secondary {
-      margin-top: 0.35rem;
-      color: #777;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 900px) {
-      .talent-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 600px) {
-      .nav {
-        flex-direction: column;
-        gap: 0.75rem;
-        align-items: flex-start;
-      }
-
-      .nav-links {
-        gap: 1rem;
-        font-size: 0.9rem;
-      }
-
-      .hero-title {
-        font-size: 1.9rem;
-      }
-
-      .about {
-        text-align: left;
-      }
-
-      .apply-card {
-        padding: 1.5rem 1.2rem;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Which Water Purifier Do You Need?</title>
+<style>
+  body {
+    background-color: #111;
+    color: #eee;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .quiz-container {
+    max-width: 600px;
+    width: 100%;
+    background: #1a1a1a;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(255,255,255,0.05);
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+  .question {
+    margin-bottom: 20px;
+  }
+  .option {
+    display: block;
+    background: #222;
+    color: #eee;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 12px;
+    margin: 8px 0;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.2s ease;
+  }
+  .option:hover {
+    background: #333;
+  }
+  button {
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    display: block;
+    margin: 20px auto 0;
+  }
+  button:hover {
+    background: #ddd;
+  }
+</style>
 </head>
 <body>
-  <!-- HEADER / NAV -->
-  <header>
-    <div class="container nav">
-      <div class="nav-left">
-        <!-- Replace with your logo file -->
-        <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FGmail&psig=AOvVaw2pQaYigGORMVMon3viOwJp&ust=1763731450613000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCNi-vOXpgJEDFQAAAAAdAAAAABAE" alt="Goondas logo" />
-        <span>Goondas.com</span>
-      </div>
-      <nav class="nav-links">
-        <a href="#hero">Home</a>
-        <a href="#about">About Us</a>
-        <a href="#careers">Careers</a>
-        <a href="#contact">Contact Us</a>
-      </nav>
+  <div class="quiz-container">
+    <h1>Which Water Purifier Do You Need?</h1>
+    <div id="quiz"></div>
+  </div>
+
+<script>
+const quizData = [
+  {
+    q: "Where does your household water come from?",
+    options: ["Borewell", "Municipal supply", "Mixed (depends on area)"],
+    key: "source"
+  },
+  {
+    q: "Have you tested your water’s TDS?",
+    options: ["<150 ppm", "150–300 ppm", "300–600 ppm", ">600 ppm", "I don’t know"],
+    key: "tds"
+  },
+  {
+    q: "How does your tap water taste or look?",
+    options: ["Normal and clear", "Slightly salty or metallic", "Very salty or bitter", "Cloudy or has particles"],
+    key: "taste"
+  },
+  {
+    q: "Does your area have frequent power cuts?",
+    options: ["Yes, daily or long durations", "Occasionally", "Rarely / Never"],
+    key: "power"
+  },
+  {
+    q: "Do you have small children, elderly, or health-sensitive members?",
+    options: ["Yes", "No"],
+    key: "health"
+  },
+  {
+    q: "What’s your approximate monthly maintenance budget?",
+    options: ["< ₹150/month", "₹150–₹300/month", "> ₹300/month"],
+    key: "budget"
+  }
+];
+
+let answers = {};
+let currentQuestion = 0;
+
+function showQuestion() {
+  const q = quizData[currentQuestion];
+  const container = document.getElementById("quiz");
+  container.innerHTML = `
+    <div class="question">
+      <h3>${q.q}</h3>
+      ${q.options.map(opt => `<div class="option" onclick="selectOption('${q.key}', '${opt}')">${opt}</div>`).join("")}
     </div>
-  </header>
+  `;
+}
 
-  <!-- HERO -->
-  <main>
-    <section id="hero" class="hero">
-      <!-- Big logo -->
-      <img src="img/logo-large.png" alt="Goondas.com Logo" class="hero-logo" />
-      <h1 class="hero-title">Goondas.com</h1>
-      <p class="hero-subtitle">for all your kattapanchayatu needs</p>
+function selectOption(key, value) {
+  answers[key] = value;
+  currentQuestion++;
+  if (currentQuestion < quizData.length) {
+    showQuestion();
+  } else {
+    evaluateResult();
+  }
+}
 
-      <!-- ABOUT -->
-      <section id="about" class="about">
-        <h2 class="section-title">About Us</h2>
-        <p>
-          our company was started in 1986 after the rising demand for rowdyism post the release of Basha &amp; Nayagan in Tamilnadu,
-        </p>
-        <p>
-          with the internet era we have expanded our services to the common people, we believe rowdyism should not be for a select few, but accessible by each and every person of this democratic country
-        </p>
-      </section>
-    </section>
+function evaluateResult() {
+  const { source, tds, taste, power, health, budget } = answers;
+  let result = "uf-uv.html"; // default
+  
+  if (tds === ">600 ppm" || taste === "Very salty or bitter" || source === "Borewell") {
+    result = "ro.html";
+  } else if (tds === "<150 ppm" || tds === "150–300 ppm" || (source === "Municipal supply" && taste === "Normal and clear")) {
+    result = "uf.html";
+  } else if (power === "Yes, daily or long durations") {
+    result = "uf.html";
+  } else {
+    result = "uf-uv.html";
+  }
 
-    <!-- TALENT SECTION -->
-    <section class="container talent-section">
-      <h2>hire from our database of 1000+ top talent</h2>
-      <div class="talent-grid">
-        <!-- CARD 1 -->
-        <article class="talent-card">
-          <img src="https://drive.google.com/file/d/1qDFi3OIZvl0DbWFksPmDK46ID-5YLwSx/view?usp=drive_link" alt="David Billa" />
-          <div class="talent-name">David Billa</div>
-          <div class="talent-meta">
-            12 years+ exp<br />
-            intimidation specialist<br />
-            wears suits even to koil
-          </div>
-        </article>
+  window.location.href = result;
+}
 
-        <!-- CARD 2 -->
-        <article class="talent-card">
-          <img src="https://drive.google.com/file/d/1HYFMhVa8bDYR1inb3s5EdfW-3hFUUYlk/view?usp=drive_link" alt="Anbu" />
-          <div class="talent-name">Anbu</div>
-          <div class="talent-meta">
-            pesittu irukkumbothu soruviduvan<br />
-            carrom player<br />
-            callsheet deficiency
-          </div>
-        </article>
-
-        <!-- CARD 3 -->
-        <article class="talent-card">
-          <img src="https://drive.google.com/file/d/1Cf-ZBzqgS0FSalYPIwF6p55EIuE5ar6B/view?usp=drive_link" alt="Pondi Pandi" />
-          <div class="talent-name">Pondi Pandi</div>
-          <div class="talent-meta">
-            master of planning sketch<br />
-            Amma pullai<br />
-            kaadhuma boyfriend
-          </div>
-        </article>
-
-        <!-- CARD 4 -->
-        <article class="talent-card">
-          <img src="https://drive.google.com/file/d/1pRL_bkw1PxTZ8FdwI09dbKfXfyrHCWXy/view?usp=drive_link" alt="Assault Sethu" />
-          <div class="talent-name">Assault Sethu</div>
-          <div class="talent-meta">
-            100+ decibel kolaimerattal<br />
-            Sugar Patient<br />
-            acting is passion
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- APPLY SECTION -->
-    <section id="careers" class="container apply-section">
-      <h2>Apply to join us!</h2>
-      <p>we’re always looking for young talent</p>
-
-      <div class="apply-card">
-        <form>
-          <div class="form-row">
-            <label class="field-label" for="alias">Alias/ Adamozhi</label>
-            <input id="alias" class="input" type="text" placeholder="Enter your street name" />
-          </div>
-
-          <div class="form-row">
-            <div class="tools-row">
-              <div class="field-label">Tools Proficient in</div>
-              <div class="tools-pills">
-                <!-- Replace with actual icons if you have them -->
-                <div class="tool-pill">🔪</div>
-                <div class="tool-pill">🪓</div>
-                <div class="tool-pill">🧱</div>
-                <div class="tool-pill">🧨</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <label class="field-label" for="area">Area Name</label>
-            <input id="area" class="input" type="text" placeholder="Eg. North Madras, Sowcarpet…" />
-          </div>
-
-          <button type="button" class="apply-btn">Submit Profile</button>
-        </form>
-      </div>
-    </section>
-
-    <!-- ALUMNI SECTION -->
-    <section id="contact" class="container alumni">
-      <h2>top alumni placed at companies like</h2>
-      <div class="alumni-logos">
-        <!-- Replace with your logo images -->
-        <img src="https://drive.google.com/file/d/12YaPqlYZF2X0yvpjJdXloRy8VCrLYcQm/view?usp=drive_link" alt="Doofenshmirtz Evil Inc." />
-        <img src="https://drive.google.com/file/d/10dXf6v7jWNbppOo8zJlcbb21qBkQNzA_/view?usp=drive_link" alt="Oscorp" />
-        <img src="https://drive.google.com/file/d/10dXf6v7jWNbppOo8zJlcbb21qBkQNzA_/view?usp=drive_link" alt="Google" />
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <span>you don’t contact us, we will contact you</span>
-    <span class="secondary">we accept black money.</span>
-  </footer>
+showQuestion();
+</script>
 </body>
 </html>
